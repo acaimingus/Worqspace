@@ -12,12 +12,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/calendarDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:dividerInsetStart="0dp"
+        app:dividerInsetEnd="0dp"
+        app:layout_constraintTop_toBottomOf="@id/calendarView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_daily_events"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/calendarView"
+        app:layout_constraintTop_toBottomOf="@id/calendarDivider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
