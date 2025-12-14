@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,7 +25,30 @@ public class CalendarFragment extends Fragment {
         FloatingActionButton fab = binding.getRoot().findViewById(R.id.fab_add_event);
 
         fab.setOnClickListener(view -> {
-            Toast.makeText(getContext(), "Create new event", Toast.LENGTH_SHORT).show();
+            PopupMenu popupMenu = new PopupMenu(requireContext(), view);
+            popupMenu.getMenuInflater().inflate(R.menu.menu_add_calendar_event, popupMenu.getMenu());
+            popupMenu.setForceShowIcon(true);
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+
+                if (id == R.id.action_deadline) {
+                    // TODO
+                    return true;
+                } else if (id == R.id.action_appointment) {
+                    // TODO
+                    return true;
+                } else if (id == R.id.action_task) {
+                    // TODO
+                    return true;
+                } else if (id == R.id.action_birthday) {
+                    // TODO
+                    return true;
+                }
+
+                return false;
+            });
+            popupMenu.show();
         });
 
         return binding.getRoot();

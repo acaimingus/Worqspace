@@ -10,4 +10,8 @@
     <string name="menu_shopping_list">Shopping List</string>
     <string name="menu_collections">Collections</string>
     <string name="add_event">Add event</string>
+    <string name="deadline">Deadline</string>
+    <string name="appointment">Appointment</string>
+    <string name="task">Task</string>
+    <string name="birthday">Birthday</string>
 </resources>
