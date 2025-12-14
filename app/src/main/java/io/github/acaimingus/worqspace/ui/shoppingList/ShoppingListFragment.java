@@ -1,4 +1,4 @@
-package io.github.acaimingus.worqspace.ui.slideshow;
+package io.github.acaimingus.worqspace.ui.shoppingList;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import io.github.acaimingus.worqspace.databinding.FragmentSlideshowBinding;
+import io.github.acaimingus.worqspace.databinding.FragmentGalleryBinding;
 
-public class SlideshowFragment extends Fragment {
+public class ShoppingListFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentGalleryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        ShoppingListViewModel shoppingListViewModel =
+                new ViewModelProvider(this).get(ShoppingListViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textGallery;
+        shoppingListViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

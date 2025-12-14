@@ -1,14 +1,14 @@
-package io.github.acaimingus.worqspace.ui.gallery;
+package io.github.acaimingus.worqspace.ui.shoppingList;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class ShoppingListViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public ShoppingListViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is the shopping list fragment");
     }

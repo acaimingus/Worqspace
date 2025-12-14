@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="io.github.acaimingus.worqspace.ui.home.HomeFragment"
+        android:name="io.github.acaimingus.worqspace.ui.calendar.CalendarFragment"
         android:label="@string/menu_calendar"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="io.github.acaimingus.worqspace.ui.gallery.GalleryFragment"
+        android:name="io.github.acaimingus.worqspace.ui.shoppingList.ShoppingListFragment"
         android:label="@string/menu_shopping_list"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_shopping_list" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="io.github.acaimingus.worqspace.ui.slideshow.SlideshowFragment"
+        android:name="io.github.acaimingus.worqspace.ui.collections.CollectionsFragment"
         android:label="@string/menu_collections"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>
