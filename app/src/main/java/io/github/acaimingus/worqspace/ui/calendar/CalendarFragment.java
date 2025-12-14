@@ -22,11 +22,19 @@ import io.github.acaimingus.worqspace.databinding.FragmentCalendarBinding;
 public class CalendarFragment extends Fragment {
 
     private FragmentCalendarBinding binding;
+    private HourAdapter hourAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         // Create the binding
         binding = FragmentCalendarBinding.inflate(inflater, container, false);
+
+        // Create the hour adapter
+        hourAdapter = new HourAdapter();
+        binding.rvDailyEvents.setLayoutManager(
+                new androidx.recyclerview.widget.LinearLayoutManager(getContext())
+        );
+        binding.rvDailyEvents.setAdapter(hourAdapter);
 
         // Create a sample calendar event
         Calendar calendar = Calendar.getInstance();
