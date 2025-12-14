@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:contentDescription="Add event"
+        android:contentDescription="@string/add_event"
         android:src="@drawable/add"
         app:backgroundTint="@color/worqspace_main"
         app:tint="@color/white"
