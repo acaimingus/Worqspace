@@ -10,21 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import io.github.acaimingus.worqspace.databinding.FragmentGalleryBinding;
+import io.github.acaimingus.worqspace.databinding.FragmentShoppingListBinding;
 
 public class ShoppingListFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentShoppingListBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ShoppingListViewModel shoppingListViewModel =
                 new ViewModelProvider(this).get(ShoppingListViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentShoppingListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
+        final TextView textView = binding.textShoppingList;
         shoppingListViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
