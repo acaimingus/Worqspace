@@ -15,4 +15,13 @@
     <string name="task">Task</string>
     <string name="birthday">Birthday</string>
     <string name="placeholder_time">HH:MM</string>
+    <string name="event_name">Event name</string>
+    <string name="event_location">Event location</string>
+    <string name="event_description">Event description</string>
+    <string name="start_time">Start time</string>
+    <string name="default_time" translatable="false">12:00</string>
+    <string name="end_time">End time</string>
+    <string name="default_time_end" translatable="false">13:00</string>
+    <string name="create">Create</string>
+    <string name="event_date">Event date</string>
 </resources>

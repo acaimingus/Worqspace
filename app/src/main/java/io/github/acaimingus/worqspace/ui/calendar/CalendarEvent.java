@@ -12,6 +12,8 @@ public class CalendarEvent {
     public String title;
     @ColumnInfo(name = "location")
     public String location;
+    @ColumnInfo(name = "notes")
+    public String notes;
     @ColumnInfo(name = "type")
     public CalendarEventType type;
 
@@ -23,9 +25,10 @@ public class CalendarEvent {
     public CalendarEvent() {
     }
 
-    public CalendarEvent(String title, String location, CalendarEventType type, long startTime, long endTime) {
+    public CalendarEvent(String title, String location, String notes, CalendarEventType type, long startTime, long endTime) {
         this.title = title;
         this.location = location;
+        this.notes = notes;
         this.type = type;
         this.startTime = startTime;
         this.endTime = endTime;
