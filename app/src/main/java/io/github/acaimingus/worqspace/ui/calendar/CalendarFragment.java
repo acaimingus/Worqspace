@@ -4,19 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.appcompat.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.applandeo.materialcalendarview.CalendarDay;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import io.github.acaimingus.worqspace.R;
+import io.github.acaimingus.worqspace.data.AppDatabase;
 import io.github.acaimingus.worqspace.databinding.FragmentCalendarBinding;
 
 public class CalendarFragment extends Fragment {
@@ -36,53 +32,14 @@ public class CalendarFragment extends Fragment {
         );
         binding.rvDailyEvents.setAdapter(hourAdapter);
 
-        // Create debug calendar events
-        // Get a calendar instance
-        Calendar calendar = Calendar.getInstance();
-        // Create a list for the events
-        List<CalendarEvent> events = new ArrayList<>();
+        loadEventsForDate(Calendar.getInstance());
 
-        // Create a the first debug calendar event
-        CalendarEvent debug1 = new CalendarEvent();
-        debug1.title = "Debug 1";
-        debug1.type = CalendarEventType.APPOINTMENT;
-        // Set start time
-        calendar.set(Calendar.HOUR_OF_DAY, 20);
-        calendar.set(Calendar.MINUTE, 20);
-        debug1.startTime = calendar.getTimeInMillis();
-        // Set end time
-        calendar.set(Calendar.HOUR_OF_DAY, 21);
-        calendar.set(Calendar.MINUTE, 27);
-        debug1.endTime = calendar.getTimeInMillis();
-        // Add it to the list
-        events.add(debug1);
-
-        CalendarEvent debug2 = new CalendarEvent();
-        debug2.title = "Debug 2";
-        debug2.type = CalendarEventType.TASK;
-        calendar.set(Calendar.HOUR_OF_DAY, 20);
-        calendar.set(Calendar.MINUTE, 10);
-        debug2.startTime = calendar.getTimeInMillis();
-        events.add(debug2);
-
-        CalendarEvent debug3 = new CalendarEvent();
-        debug3.title = "Debug 3";
-        debug3.type = CalendarEventType.DEADLINE;
-        calendar.set(Calendar.HOUR_OF_DAY, 17);
-        calendar.set(Calendar.MINUTE, 35);
-        debug3.startTime = calendar.getTimeInMillis();
-        events.add(debug3);
-
-        CalendarEvent debug4 = new CalendarEvent();
-        debug4.title = "Birthday of Debug";
-        debug4.type = CalendarEventType.BIRTHDAY;
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        debug4.startTime = calendar.getTimeInMillis();
-        events.add(debug4);
-
-
-        hourAdapter.updateEvents(events);
+        binding.calendarView.setOnCalendarDayClickListener(calendarDay -> {
+            // Get the given calendar day
+            Calendar clickedDay = calendarDay.getCalendar();
+            // Load the events for that day
+            loadEventsForDate(clickedDay);
+        });
 
         // Create a floating action button for the calendar
         FloatingActionButton fab = binding.getRoot().findViewById(R.id.fab_add_event);
@@ -96,7 +53,21 @@ public class CalendarFragment extends Fragment {
                 int id = item.getItemId();
 
                 if (id == R.id.action_deadline) {
-                    // TODO
+                    Calendar startTime = Calendar.getInstance();
+                    startTime.set(Calendar.HOUR_OF_DAY, 16);
+                    startTime.set(Calendar.MINUTE, 24);
+
+                    CalendarEvent newEvent = new CalendarEvent("Debug deadline", "Debug location", CalendarEventType.DEADLINE, startTime.getTimeInMillis(), startTime.getTimeInMillis());
+
+                    AppDatabase.databbaseWriteExecutor.execute(() -> {
+                        AppDatabase db = AppDatabase.getDatabase(requireContext());
+                        db.eventDao().insert(newEvent);
+
+                        if (getActivity() != null) {
+                            getActivity().runOnUiThread(() -> loadEventsForDate(startTime));
+                        }
+                    });
+
                     return true;
                 } else if (id == R.id.action_appointment) {
                     // TODO
@@ -115,6 +86,31 @@ public class CalendarFragment extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    private void loadEventsForDate(Calendar date) {
+        // Get the start of the day
+        Calendar start = (Calendar) date.clone();
+        start.set(Calendar.HOUR_OF_DAY, 0);
+        start.set(Calendar.MINUTE, 0);
+        start.set(Calendar.SECOND, 0);
+        start.set(Calendar.MILLISECOND, 0);
+        long startMillis = start.getTimeInMillis();
+
+        // Get the end of the day
+        Calendar end = (Calendar) start.clone();
+        end.add(Calendar.DAY_OF_MONTH, 1);
+        long endMillis = end.getTimeInMillis();
+
+        AppDatabase db = AppDatabase.getDatabase(requireContext());
+        AppDatabase.databbaseWriteExecutor.execute(() -> {
+            // Load the events
+            List<CalendarEvent> events = db.eventDao().getEventsForDay(startMillis, endMillis);
+
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(() -> hourAdapter.updateEvents(events));
+            }
+        });
     }
 
     @Override

@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:type="one_day_picker" />
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/calendarDivider"
         android:layout_width="match_parent"
