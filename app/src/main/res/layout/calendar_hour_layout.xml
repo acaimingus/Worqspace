@@ -24,22 +24,22 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="0dp"
         app:layout_constraintStart_toEndOf="@id/tv_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_time"
         app:layout_constraintBottom_toBottomOf="@id/tv_time" />
-    <TextView
-        android:id="@+id/tv_event_name"
+    <LinearLayout
+        android:id="@+id/ll_hour_events"
+        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:text=""
         android:padding="8dp"
-        android:background="@android:drawable/dialog_holo_light_frame"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/tv_time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/divider" />
 </androidx.constraintlayout.widget.ConstraintLayout>

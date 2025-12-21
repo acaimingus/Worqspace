@@ -36,18 +36,53 @@ public class CalendarFragment extends Fragment {
         );
         binding.rvDailyEvents.setAdapter(hourAdapter);
 
-        // Create a sample calendar event
+        // Create debug calendar events
+        // Get a calendar instance
         Calendar calendar = Calendar.getInstance();
+        // Create a list for the events
+        List<CalendarEvent> events = new ArrayList<>();
+
+        // Create a the first debug calendar event
+        CalendarEvent debug1 = new CalendarEvent();
+        debug1.title = "Debug 1";
+        debug1.type = CalendarEventType.APPOINTMENT;
+        // Set start time
         calendar.set(Calendar.HOUR_OF_DAY, 20);
+        calendar.set(Calendar.MINUTE, 20);
+        debug1.startTime = calendar.getTimeInMillis();
+        // Set end time
+        calendar.set(Calendar.HOUR_OF_DAY, 21);
+        calendar.set(Calendar.MINUTE, 27);
+        debug1.endTime = calendar.getTimeInMillis();
+        // Add it to the list
+        events.add(debug1);
+
+        CalendarEvent debug2 = new CalendarEvent();
+        debug2.title = "Debug 2";
+        debug2.type = CalendarEventType.TASK;
+        calendar.set(Calendar.HOUR_OF_DAY, 20);
+        calendar.set(Calendar.MINUTE, 10);
+        debug2.startTime = calendar.getTimeInMillis();
+        events.add(debug2);
+
+        CalendarEvent debug3 = new CalendarEvent();
+        debug3.title = "Debug 3";
+        debug3.type = CalendarEventType.DEADLINE;
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.MINUTE, 35);
+        debug3.startTime = calendar.getTimeInMillis();
+        events.add(debug3);
+
+        CalendarEvent debug4 = new CalendarEvent();
+        debug4.title = "Birthday of Debug";
+        debug4.type = CalendarEventType.BIRTHDAY;
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
+        debug4.startTime = calendar.getTimeInMillis();
+        events.add(debug4);
 
-        List<CalendarDay> events = new ArrayList<>();
 
-        CalendarDay day = new CalendarDay(calendar);
-        day.setImageResource(R.drawable.calendar);
-
-        events.add(day);
-        binding.calendarView.setCalendarDays(events);
+        hourAdapter.updateEvents(events);
 
         // Create a floating action button for the calendar
         FloatingActionButton fab = binding.getRoot().findViewById(R.id.fab_add_event);
